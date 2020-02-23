@@ -1,38 +1,38 @@
 body {
     background: #e5e5e5;
 }
-
-.tbody > div {
-    width: 100px;
-    padding: 20px;
-    overflow: hidden;
-}
-.tbody > div:not(:last-child){
-    border-bottom: 1px solid lightgray;
-}
-.thead > div {
-    width: 100px;
-    padding: 20px;
-    overflow: hidden;
-    border-bottom: 1px solid lightgray;
-}
-.tbody:hover {
-    background-color: #a4a4a4;
-}
-.tbody  {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 .tbody, .thead {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
 }
+.tbody  {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.tbody:hover {
+    background-color: #a4a4a4;
+}
+.tbody > div, .thead > div {
+    width: 140px;
+    padding: 20px;
+    overflow: hidden;
+}
+.thead > div {
+    border-bottom: 1px solid #a4a4a4;
+}
+.tbody:not(:last-child) {
+    border-bottom: 1px solid #a4a4a4;
+}
+
+
+
+
 
 
 .customers-list-wrapper {
     background-color: #fff;
-    width: 60%;
+    width: 80%;
     min-height: 300px;
     margin: 200px auto;
     text-align: center;
