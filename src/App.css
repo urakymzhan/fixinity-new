@@ -1,6 +1,36 @@
 body {
     background: #e5e5e5;
 }
+.customers-page {
+    /* background-color: green; */
+    padding: 10px;
+}
+.nav-header {
+    width: 80%;
+    margin: 10px auto 20px auto;
+}
+.add-customer {
+    width: 80%;
+    margin: 20px auto;
+    margin-bottom: 20px;
+}
+.add-customer button {
+    border-style: none;
+    background-color: #37a0f4;
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.customers-list-wrapper {
+    background-color: #fff;
+    width: 80%;
+    min-height: 300px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 4px;
+}
+
 .tbody, .thead {
     width: 100%;
     display: flex;
@@ -30,11 +60,3 @@ body {
 
 
 
-.customers-list-wrapper {
-    background-color: #fff;
-    width: 80%;
-    min-height: 300px;
-    margin: 200px auto;
-    text-align: center;
-    border-radius: 4px;
-}

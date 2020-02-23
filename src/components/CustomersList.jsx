@@ -11,37 +11,6 @@ import React, { Component } from 'react';
 import '../App.css';
 
 
-// const hStyle = {
-//     width: "100px",
-//     // float: "left",
-//     padding: "20px",
-//     background: "red",
-//     overflow: "hidden"
-// }
-
-// const bStyle = {
-//     width: "100px",
-//     // float: "left",
-//     padding: "20px",
-//     background: "orange",
-//     overflow: "hidden"
-// }
-
-// const mainStyle = {
-//     width: "60%",
-//     minHeight: "300px",
-//     background: "gray",
-//     margin: "200px auto",
-//     textAlign: "center"
-// }
-
-// const nestedStyle = {
-//     width: "100%",
-//     display: "flex",
-//     // justifyContent: "space-around",
-//     flexWrap: "no-wrap",
-// }
-
 class CustomerList extends Component {
 
 
@@ -57,30 +26,38 @@ class CustomerList extends Component {
 
     render() {
         return (
-            <div className="customers-list-wrapper">
-                <div className="thead">
-                    {this.getHeader()}
+            <div className="customers-page">
+                < Header />
+                <div className="add-customer"><button>Add New Customer</button></div>
+                <div className="customers-list-wrapper">
+                    <div className="thead">
+                        {this.getHeader()}
+                    </div>
+                    {
+                    this.props.data.map((row) => {
+                    const { id, name, phone, zip, vin, status, action } = row;  
+                    // console.log(row);
+                        return ( 
+                                <div className="tbody">
+                                    <div>{id}</div>
+                                    <div>{name}</div>
+                                    <div>{phone}</div>
+                                    <div>{zip}</div>
+                                    <div>{vin}</div>
+                                    <div>{status}</div>
+                                    <div>{action} <span>edit</span> | <span>delete</span></div>
+                                </div>
+                        )   
+                    })
+                    }                    
                 </div>
-                {
-                this.props.data.map((row) => {
-                const { id, name, phone, zip, vin, status, action } = row;  
-                console.log(row);
-                    return ( 
-                            <div className="tbody">
-                                <div>{id}</div>
-                                <div>{name}</div>
-                                <div>{phone}</div>
-                                <div>{zip}</div>
-                                <div>{vin}</div>
-                                <div>{status}</div>
-                                <div>{action}</div>
-                            </div>
-                    )   
-                })
-                }                    
-        </div>
+            </div>
         )
     }
 }
 
+function Header() {
+    return <div className="nav-header"><span className="fixinity-header"> Fixinity </span>
+     | <span className="home-header"> HOME </span> > <span className="customers-header"> Customers </span></div>
+}
 export default CustomerList;
