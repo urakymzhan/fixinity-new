@@ -1,2 +1,3 @@
 # fixinity-new
-update on previous version
+version 2.0
+

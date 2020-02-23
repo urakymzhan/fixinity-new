@@ -1,3 +1,9 @@
+/* globals */
+button, input {
+    outline: none;
+    cursor: pointer;
+}
+/*  -------------------  */
 body {
     background: #e5e5e5;
     color: #808080;
@@ -41,12 +47,14 @@ body {
     display: flex;
     flex-wrap: nowrap;
     font-size: 85%;
+    cursor: pointer;
 }
 .tbody:hover {
     background-color: #d0d0d0;
 }
 .tbody > div, .thead > div {
-    width: 140px;
+    /* min-width: 120px; */
+    width: calc(100% / 6);
     padding: 20px;
     overflow: hidden;
 }
@@ -79,11 +87,9 @@ body {
 }
 #edit-customer {
     color: #37a0f4;
-    cursor: pointer;
 }
 #delete-customer {
     color: #f44336;
-    cursor: pointer;
 }
  .customers-header {
     font-size: 85%;
@@ -93,3 +99,42 @@ body {
      margin: auto 5px;
      color: #37a0f4;
  }
+ #status {
+    padding: 5px 10px;
+    border-style: none;
+    border-radius: 4px;
+ }
+ #status[value="Active"]{
+     background: #37a0f4;
+     color : #fff;
+ }
+ #status[value="Inactive"]{
+    background: #d7d7d7;
+}
+#status[value="Progress"]{
+    background: #ffa500;
+}
+
+/* pagination */
+
+.pagination {
+    padding: 20px 7%;
+    text-align: right;
+    font-size: 80%;
+    color: #262626;
+}
+.pag-dropdown {
+    margin: auto 2%;
+}
+.pag-total {
+    margin-right: 2%;
+}
+/* change its color based 
+on page count start or end */
+.pag-left {
+    margin-right: 2%;
+    color: #808080;
+}
+.pag-right {
+    
+}
