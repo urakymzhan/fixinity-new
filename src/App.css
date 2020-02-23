@@ -2,6 +2,7 @@ body {
     background: #e5e5e5;
 }
 .customers-page {
+    /* uncomment below to see end of page */
     /* background-color: green; */
     padding: 10px;
 }
@@ -35,10 +36,6 @@ body {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-}
-.tbody:last-child  {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
 }
 .tbody:hover {
     background-color: #d0d0d0;

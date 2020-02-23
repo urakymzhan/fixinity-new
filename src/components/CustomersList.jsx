@@ -34,11 +34,10 @@ class CustomerList extends Component {
                         {this.getHeader()}
                     </div>
                     {
-                    this.props.data.map((row) => {
-                    const { id, name, phone, zip, vin, status, action } = row;  
-                    // console.log(row);
-                        return ( 
-                            <>
+                        this.props.data.map((row) => {
+                            // destruction
+                        const { id, name, phone, zip, vin, status, action } = row;  
+                            return ( 
                                 <div className="tbody">
                                     <div>{id}</div>
                                     <div>{name}</div>
@@ -48,10 +47,8 @@ class CustomerList extends Component {
                                     <div>{status}</div>
                                     <div>{action} <span>edit</span> | <span>delete</span></div>
                                 </div>
-                                 {/* <hr /> */}
-                                 </>
-                        )   
-                    })
+                            )   
+                        })
                     }                    
                 </div>
             </div>
