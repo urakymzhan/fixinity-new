@@ -9,6 +9,13 @@
 
 import React, { Component } from 'react';
 import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { 
+    faHome, faChevronRight, 
+    faChevronLeft, faSortDown, 
+    faPencilAlt, faTrash
+    } 
+from '@fortawesome/free-solid-svg-icons';
 
 
 class CustomerList extends Component {
@@ -18,7 +25,9 @@ class CustomerList extends Component {
         if(this.props.data) {
             let headers = Object.keys(this.props.data[0]);
             //  console.log(headers);
-            return headers.map((header) => {
+            // don't show id
+            let headerExceptId = headers.slice(1);
+            return headerExceptId.map((header) => {
                 return <div>{header}</div>
             })
         }
@@ -39,13 +48,14 @@ class CustomerList extends Component {
                         const { id, name, phone, zip, vin, status, action } = row;  
                             return ( 
                                 <div className="tbody">
-                                    <div>{id}</div>
+                                      {/* don't show id */}
+                                    {/* <div>{id}</div> */}
                                     <div>{name}</div>
                                     <div>{phone}</div>
                                     <div>{zip}</div>
                                     <div>{vin}</div>
                                     <div>{status}</div>
-                                    <div>{action} <span>edit</span> | <span>delete</span></div>
+                                    <div id="action">{action} <span><FontAwesomeIcon id="edit-customer" icon={faPencilAlt}/> </span> <span><FontAwesomeIcon id="delete-customer" icon={faTrash}/> </span></div>
                                 </div>
                             )   
                         })
@@ -58,6 +68,6 @@ class CustomerList extends Component {
 
 function Header() {
     return <div className="nav-header"><span className="fixinity-header"> Fixinity </span>
-     | <span className="home-header"> HOME </span> > <span className="customers-header"> Customers </span></div>
+     | <span className="home-header"> <FontAwesomeIcon icon={faHome}/> </span> > <span className="customers-header"> Customers </span></div>
 }
 export default CustomerList;
