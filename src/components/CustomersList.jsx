@@ -38,6 +38,7 @@ class CustomerList extends Component {
                     const { id, name, phone, zip, vin, status, action } = row;  
                     // console.log(row);
                         return ( 
+                            <>
                                 <div className="tbody">
                                     <div>{id}</div>
                                     <div>{name}</div>
@@ -47,6 +48,8 @@ class CustomerList extends Component {
                                     <div>{status}</div>
                                     <div>{action} <span>edit</span> | <span>delete</span></div>
                                 </div>
+                                 {/* <hr /> */}
+                                 </>
                         )   
                     })
                     }                    

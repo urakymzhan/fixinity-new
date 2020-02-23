@@ -36,12 +36,12 @@ body {
     display: flex;
     flex-wrap: nowrap;
 }
-.tbody  {
+.tbody:last-child  {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 .tbody:hover {
-    background-color: #a4a4a4;
+    background-color: #d0d0d0;
 }
 .tbody > div, .thead > div {
     width: 140px;
