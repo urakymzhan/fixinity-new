@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import CustomersList from './components/CustomersList.jsx';
-import AddCustomer from './components/AddCustomer.jsx';
+// import AddCustomer from './components/AddCustomer.jsx';
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
 
 const data = [
@@ -39,11 +39,11 @@ class App extends Component {
     if(this.state.customers.length > 0 ) {
       return(
         <Router>
-            <Switch>
-                <Route path="/add">
+            <Switch >
+                {/* <Route path="/add">
                     <AddCustomer />
-                </Route>
-                <Route path="/">
+                </Route> */}
+                <Route path="/" >
                     <CustomersList data = {this.state.customers}/>
                 </Route>
             </Switch>
