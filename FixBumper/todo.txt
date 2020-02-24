@@ -1,0 +1,4 @@
+- login page fix
+- add localstorage
+- add redux 
+- add pagination functionality

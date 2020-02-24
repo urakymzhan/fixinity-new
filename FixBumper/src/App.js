@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import CustomersList from './components/CustomersList.jsx';
-// import AddCustomer from './components/AddCustomer.jsx';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -8,15 +8,6 @@ import {
   Route
 } from "react-router-dom";
 
-const data = [
-  {id: 1, name: 'Azamat', phone: '5718894220', zip: '94330', vin: '5346543654641', status:'Active', action: ''},
-  {id: 2, name: 'Kuttubek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive', action: ''},
-  {id: 3, name: 'Aibek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Progress', action: ''},
-  {id: 4, name: 'Tolon', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active', action: ''},
-  {id: 5, name: 'Kanat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive', action: ''},
-  {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active', action: ''},
-  {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive', action: ''}
-]
 
 class App extends Component {
   constructor(props) {
@@ -25,24 +16,27 @@ class App extends Component {
       customers: []
     }
   }
-
-  //  TODO: later i will get this data from api 
-  componentDidMount = () => {
-      if(data.length > 0) {
+// for now backend is python. 
+// Node is giving error
+  componentDidMount(){
+    axios.get('/api/customers') 
+        .then(res => {
+        const apibody = res.data;
+        console.log(apibody)
         this.setState({
-          customers: data
-        })
-      }
-  }
+            customers: apibody,
+        });
+    })
+    .catch(error => {
+        console.log(error); 
+    })
+}
 
   render() {
     if(this.state.customers.length > 0 ) {
       return(
         <Router>
             <Switch >
-                {/* <Route path="/add">
-                    <AddCustomer />
-                </Route> */}
                 <Route path="/" >
                     <CustomersList data = {this.state.customers}/>
                 </Route>

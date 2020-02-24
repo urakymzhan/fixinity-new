@@ -1,0 +1,107 @@
+
+#add-customer-btn {
+    margin: 1rem 0;
+    font-size: 15px;
+    background-color: var(--fixBlue);
+    border-radius: 6px;
+    padding: 0.6rem;
+    width: 170px;
+    color: var(--fixWhite);
+    outline: none;
+    cursor: pointer;
+}
+#status-column {
+    padding: 8px 14px;
+    background-color: var(--fixBlue);
+    color: var(--fixWhite);
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+}
+#add-customer-form {
+    text-align: center;
+}
+#popup-h3 {
+    margin-left: 1.5rem;
+    text-shadow: 2px 2px 22px gray;
+}
+#new-name, #new-phone, #new-vin, #new-zip, #new-status, #new-action {
+    padding: 1rem;
+    width: 40%;
+    margin-bottom: 2rem;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    font-size: 14px;
+}
+#new-name, #new-status, #new-zip {
+    margin-right: 2rem;
+}
+#popup-add-customer-btn{
+    margin-left: 10%;
+    float: left;
+    font-size: 14px;
+    padding: 0.4rem 1rem;
+    background-color: var(--fixBlue);
+    color: var(--fixWhite);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+#popup-cancel-customer-btn{
+    margin-right: 10%;
+    float: right;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+#pagination {
+    padding: 12px 8px;
+    color: var(--textColor);
+}
+#pagination td {
+    border-bottom: none;
+    text-align: right;
+    font-size: 12px;
+    padding-right: 2rem;
+}
+#pagination:hover {
+    background-color: var(--fixWhite);
+}
+.pag-1 {
+    margin-right: 1rem;
+}
+.pag-5, .pag-6 {
+    margin-right: 3rem;
+    cursor: pointer;
+}
+.pag-5, .pag-7 {
+    cursor: pointer;
+}
+.pag-2 {
+    font-size: 14px;
+}
+.pag-of, .pag-4 {
+    margin-right: 0.2rem;
+}
+.pag-dropdown {
+    margin-right: 3rem;
+    margin-left: 0.2rem;
+    cursor: pointer;
+}
+#font-dropdown {
+    height: 1.2rem;
+    width: 0.8rem;
+}
+
+#edit-customer {
+    margin-right: 1rem; 
+    color: var(--fixBlue);
+    cursor: pointer;
+}
+
+#delete-customer {
+    color: #D35400;
+    cursor: pointer;
+}
