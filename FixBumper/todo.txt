@@ -2,3 +2,8 @@
 - add localstorage
 - add redux 
 - add pagination functionality
+- close modal when refresh 
+-fix css issue when console is open
+- useparams and id for editcustomer not index;
+- separate in modules
+
