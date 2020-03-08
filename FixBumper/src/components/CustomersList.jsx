@@ -1,18 +1,9 @@
-// this should have 
-
-// 1. Status
-// 2. Action (depends how deep we want to go. We can simply put icon)
-//     1. Edit
-//     2. Delete
-
-
 import React, { Component } from 'react';
+import Pagination from './Pagination.jsx';
+import Header from './Header.jsx';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { 
-    faHome, faPencilAlt, faTrash, faChevronRight, 
-    faChevronLeft, faSortDown 
-} from '@fortawesome/free-solid-svg-icons';
+import {  faHome, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
     Switch,
     Route,
@@ -52,6 +43,11 @@ class CustomersList extends Component {
         // console.log("background from Customers", background);
         // console.log("location From CustomerList: " , location);
         // console.log(history);
+
+        // for pagination
+        let { start, end } = this.props.data;
+        let paginatedData = this.props.data.customers.slice(start, end+1);
+
         return (
             <div className="customers-page">
                 < Header />
@@ -77,7 +73,7 @@ class CustomersList extends Component {
                         {this.getHeader()}
                     </div>
                     {
-                        this.props.data.customers.map((row, ind) => {
+                        paginatedData.map((row, ind) => {
                             // destruction
                             const { name, phone, zip, vin, status, action } = row;  
 
@@ -114,30 +110,15 @@ class CustomersList extends Component {
                         })
 
                     } 
-                    <Pagination />                 
+                    <Pagination 
+                      data = {this.props.data}
+                      next = {this.props.next}
+                      handlePerPageValue={this.props.handlePerPageValue}
+                    />                 
                 </div>
             </div>
         )
     }
-}
-
-function Header() {
-    return <div className="nav-header"><span className="fixinity-header"> Fixinity </span>
-     | <span className="home-header"> <FontAwesomeIcon icon={faHome}/> </span> > <span className="customers-header"> Customers </span></div>
-}
-
-function Pagination() {
-    return  <div className="pagination">
-                <span> Rows per page</span>
-                <span className="pag-dropdown"> 10 <FontAwesomeIcon icon={faSortDown}/></span>
-                <span className="pag-start"> 1 </span> 
-                -
-                <span className="pag-end"> 10 </span>
-                of 
-                <span className="pag-total"> 68 </span>
-                <span className="pag-left"> <FontAwesomeIcon icon={faChevronLeft}/> </span>
-                <span className="pag-right"> <FontAwesomeIcon icon={faChevronRight}/> </span>
-            </div>
 }
 
 function AddCustomerForm (props) {

@@ -15,7 +15,11 @@ class App extends Component {
     this.state = {
       customers: [],
       newCustomer: {},
-      currentIndex: 0
+      currentIndex: 0,
+      currentPage: 1,
+      start: 1,
+      end: 5,
+      perPageValue: 5 
     }
   }
 // for now backend is python. 
@@ -83,6 +87,38 @@ editCustomer = (id) => {
   this.setState({ newCustomer: {} })
 }
 
+// pagination
+next = (arrow) => {
+  let start = this.state.start;
+  let end = this.state.end;
+  let total = this.state.customers.length;
+
+  let perPageValue = this.state.perPageValue;
+
+  if ( arrow === "right" && end <= total) {
+    this.setState({
+      start: start + perPageValue,
+      end: end + perPageValue
+    })
+  } else if (arrow === "left" && end > perPageValue){
+    this.setState({
+      start: start - perPageValue,
+      end: end - perPageValue
+    })
+  }
+}
+
+handlePerPageValue = (e) => {
+  let newValue = Number(e.target.value);
+  // console.log(e.target.value)
+  // console.log(this.state.perPageValue);
+  this.setState({
+    perPageValue: newValue,
+    end: newValue,
+    start: 1
+  })
+}
+
   render() {
     if(this.state.customers.length > 0 ) {
       return(
@@ -96,13 +132,15 @@ editCustomer = (id) => {
                       addNewCustomer={this.addNewCustomer}
                       editCustomer={this.editCustomer}
                       handleEditChange={this.handleEditChange}
+                      next={this.next}
+                      handlePerPageValue={this.handlePerPageValue}
                     />
                 </Route>
             </Switch>
         </Router>
       )
     } else {
-      return <h1>Loading ...</h1>
+      return <h1 style={{textAlign: "center", marginTop: "100px"}}>Loading ...</h1>
     }
   }
 }

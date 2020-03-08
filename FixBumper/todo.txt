@@ -3,7 +3,7 @@
 - add redux 
 - add pagination functionality
 - close modal when refresh 
--fix css issue when console is open
+-fix css issue when console is open ( give color to body instead of customers-page)
 - useparams and id for editcustomer not index;
 - separate in modules
 
