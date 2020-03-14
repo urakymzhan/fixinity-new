@@ -38,16 +38,20 @@ class App extends Component {
     })
 }
 
-onStatusChange = (ind) => {
-  const data=this.state.customers;
-  if (data[ind].status==='Active') {
-      data[ind].status='Progress'
-  } else if(data[ind].status==='Progress') {
-      data[ind].status='Inactive'
-  } else {
-      data[ind].status='Active'
-  }
-  this.setState({[this.state.customers]: data})
+onStatusChange = (id) => {
+  const allCustomers = this.state.customers;
+  allCustomers.map((customer) => {
+    if (customer.id == id) {
+      if (customer.status==='Active') {
+        customer.status='Progress'
+      } else if(customer.status==='Progress') {
+        customer.status='Inactive'
+      } else {
+        customer.status='Active'
+      }
+    }
+    this.setState({[this.state.customers]: allCustomers})
+  })
 }
 // combine this below 2 functions
 handleChange = (e) => {
@@ -69,22 +73,38 @@ addNewCustomer = () => {
   if (Object.entries(tmpCustomer).length !== 0) {
     allCustomers.push(tmpCustomer);
   }
-  console.group(allCustomers);
   this.setState({ newCustomer: {} })
 }
 
 editCustomer = (id) => {
+  // TODO: fix this later just using id, remove index. look for delete
+  let ind = id - 1;
   const allCustomers = this.state.customers;
-  const theCurrentUser = this.state.customers[id-1];
+  const theCurrentUser = this.state.customers[ind];
   const tmpCustomer = this.state.newCustomer;
   if (Object.entries(tmpCustomer).length !== 0) {
     for (let key of Object.keys(tmpCustomer)) {
       theCurrentUser[key] = tmpCustomer[key];
-      allCustomers[id-1] = theCurrentUser;
+      allCustomers[ind] = theCurrentUser;
       this.setState({customers: allCustomers})
     }
   }
   this.setState({ newCustomer: {} })
+}
+deleteCustomer = (id) => {
+  const allCustomers = this.state.customers;
+  var indexToDeleteArray = allCustomers.map((customer) => {
+    // type check later
+    if (customer.id == id) {
+      return allCustomers.indexOf(customer);
+    }
+  })
+  indexToDeleteArray.forEach((indexToDelete) => {
+    if(indexToDelete !== undefined ) {
+      allCustomers.splice(indexToDelete, 1);
+      this.setState({ customers: allCustomers })
+    }
+  })
 }
 
 // pagination
@@ -106,6 +126,8 @@ next = (arrow) => {
       end: end - perPageValue
     })
   }
+  // console.log("start", start);
+  // console.log("end", end);
 }
 
 handlePerPageValue = (e) => {
@@ -134,6 +156,7 @@ handlePerPageValue = (e) => {
                       handleEditChange={this.handleEditChange}
                       next={this.next}
                       handlePerPageValue={this.handlePerPageValue}
+                      deleteCustomer={this.deleteCustomer}
                     />
                 </Route>
             </Switch>

@@ -46,7 +46,10 @@ class CustomersList extends Component {
 
         // for pagination
         let { start, end } = this.props.data;
-        let paginatedData = this.props.data.customers.slice(start, end+1);
+        let paginatedData = this.props.data.customers.slice(start-1, end);
+        // start = end;
+
+        console.log(paginatedData);
 
         return (
             <div className="customers-page">
@@ -75,12 +78,11 @@ class CustomersList extends Component {
                     {
                         paginatedData.map((row, ind) => {
                             // destruction
-                            const { name, phone, zip, vin, status, action } = row;  
-
-                            let id= this.props.data.customers[ind].id;
+                            const { name, phone, zip, vin, status, action, id } = row;  
+                            // console.log("id on each pagination: ", id);
 
                             return ( 
-                                <div className="tbody" key={ind}> 
+                                <div className="tbody" key={id}> 
                                     <div>{name}</div>
                                     <div>{phone}</div>
                                     <div>{zip}</div>
@@ -90,7 +92,7 @@ class CustomersList extends Component {
                                             id="status" 
                                             type="submit" 
                                             value={status} 
-                                            onClick={() => this.props.onStatusChange(ind)}
+                                            onClick={() => this.props.onStatusChange(id)}
                                         />
                                     </div>
                                     <div id="action"> {action}
@@ -102,7 +104,9 @@ class CustomersList extends Component {
                                             handleEditChange={this.props.handleEditChange} 
                                             editCustomer={this.props.editCustomer} />
                                         <span>
-                                            <FontAwesomeIcon id="delete-customer" icon={faTrash}/> 
+                                            <FontAwesomeIcon id="delete-customer" icon={faTrash} 
+                                            onClick={() => this.props.deleteCustomer(id)}
+                                            /> 
                                         </span>
                                     </div>  
                                 </div>
