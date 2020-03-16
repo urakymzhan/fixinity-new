@@ -19,10 +19,12 @@ class App extends Component {
       currentPage: 1,
       start: 1,
       end: 5,
-      perPageValue: 5 
+      perPageValue: 5,
+      // will add later
+      arrowColor: ""
     }
   }
-// for now backend is python. 
+// currently backend is python. 
 // Node is giving an error
   componentDidMount() {
     axios.get('/api/customers') 
@@ -61,15 +63,16 @@ handleChange = (e) => {
 }
 handleEditChange = (e, id) => {
   // console.log(id)
-  let tmpCustomer = this.state.newCustomer;
-  tmpCustomer[e.target.name] = e.target.value;
-  this.setState({ newCustomer: tmpCustomer })
+  let newCustomer = this.state.newCustomer;
+  console.log("newCustomer", newCustomer);
+  newCustomer[e.target.name] = e.target.value;
+  this.setState({ newCustomer: newCustomer })
 }
 addNewCustomer = () => {
   const allCustomers = this.state.customers;
   const tmpCustomer = this.state.newCustomer;
-  // TODO: figure out better way than adding id here
-  tmpCustomer.id = allCustomers.length + 1
+  // TODO: figure out better way 
+  tmpCustomer.id = allCustomers.length + 1;
   if (Object.entries(tmpCustomer).length !== 0) {
     allCustomers.push(tmpCustomer);
   }
@@ -77,24 +80,29 @@ addNewCustomer = () => {
 }
 
 editCustomer = (id) => {
-  // TODO: fix this later just using id, remove index. look for delete
-  let ind = id - 1;
   const allCustomers = this.state.customers;
-  const theCurrentUser = this.state.customers[ind];
-  const tmpCustomer = this.state.newCustomer;
-  if (Object.entries(tmpCustomer).length !== 0) {
-    for (let key of Object.keys(tmpCustomer)) {
-      theCurrentUser[key] = tmpCustomer[key];
-      allCustomers[ind] = theCurrentUser;
-      this.setState({customers: allCustomers})
-    }
-  }
-  this.setState({ newCustomer: {} })
+  const newCustomer = this.state.newCustomer;
+  allCustomers.map((customer) => {
+      if (Object.entries(newCustomer).length !== 0) {
+        // id is string, customer.id is number of type
+        if (customer.id == id) {
+          for (let key of Object.keys(newCustomer)) {
+            customer[key] = newCustomer[key]
+            console.log("newCustomer: ", newCustomer)
+            let indexToEdit = allCustomers.indexOf(customer);
+            console.log(indexToEdit);
+            allCustomers[indexToEdit] = customer;
+            this.setState({customers: allCustomers})
+          }
+        }
+      }
+      this.setState({ newCustomer: {} })
+  })
 }
 deleteCustomer = (id) => {
   const allCustomers = this.state.customers;
   var indexToDeleteArray = allCustomers.map((customer) => {
-    // type check later
+    // id is string, customer.id is number of type
     if (customer.id == id) {
       return allCustomers.indexOf(customer);
     }
@@ -115,7 +123,7 @@ next = (arrow) => {
 
   let perPageValue = this.state.perPageValue;
 
-  if ( arrow === "right" && end <= total) {
+  if ( arrow === "right" && end < total) {
     this.setState({
       start: start + perPageValue,
       end: end + perPageValue
@@ -141,6 +149,23 @@ handlePerPageValue = (e) => {
   })
 }
 
+updateVals = (data) => {
+  console.log("data", data);
+  let start = this.state.start; 
+  let end = this.state.end; 
+  let perPageValue = this.state.perPageValue;
+  start = start - perPageValue;
+  end = end - perPageValue;
+  console.log(start);
+  console.log(end)
+  let paginatedData = data.slice(start-1, end);
+  this.setState ( {
+    start: start,
+    end: end
+  })
+  return paginatedData;
+
+}
   render() {
     if(this.state.customers.length > 0 ) {
       return(
@@ -157,6 +182,7 @@ handlePerPageValue = (e) => {
                       next={this.next}
                       handlePerPageValue={this.handlePerPageValue}
                       deleteCustomer={this.deleteCustomer}
+                      updateVals={this.updateVals}
                     />
                 </Route>
             </Switch>

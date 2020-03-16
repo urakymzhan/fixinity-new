@@ -7,16 +7,17 @@ function Pagination(props) {
     let { start, end, currentPage, perPageValue } = props.data;
     let { handlePerPageValue, next } = props;
     let total = props.data.customers.length;
-    // console.log(props.data)
     if ( total < end) {
         end = total;
+    }
+    if (start > end ) {
+        start = start - perPageValue;
     }
     // console.log(start, end, currentPage, total);
     // console.log(props.next)
 
     return  <div className="pagination">
                 <span> Rows per page</span>
-                {/* <span className="pag-dropdown"> { end - start + 1} </span><i className="fas fa-sort-down"></i> */}
                 <span className="pag-dropdown">
                 <select style={{border: "none", appearance: "none"}} onChange={handlePerPageValue} >
                     <option value="5"> 5</option>

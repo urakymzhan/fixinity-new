@@ -28,7 +28,7 @@ body {
     border-style: none;
     background-color: #37a0f4;
     padding: 10px;
-    color: #fff;
+    color: #e5e5e5;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
@@ -128,15 +128,16 @@ body {
 .pag-total {
     margin-right: 2%;
 }
-/* TODO: change its color based 
-on page count start or end */
 .pag-left {
     margin-right: 2%;
+}
+.pag-right:hover, .pag-left:hover {
     color: #808080;
 }
-.pag-right {
-
-}
+/* will use later in react state */
+/* .arrowColor {
+    color: #808080;
+} */
 
 
 /* modal */

@@ -2,14 +2,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# customersData = [
-#                 { 'Name': 'Wasif', 'Phone': "111-111-1111", 'Zip': 94321, 'VIN': "VIN2398", 'Status': "Active", 'Action': "NUL" },
-#                 { 'Name': 'Ali', 'Phone': "111-111-1111", 'Zip': 94321, 'VIN': "VIN2398", 'Status': "Active", 'Action': "NUL" },
-#                 { 'Name': 'Saad', 'Phone': "111-111-1111", 'Zip': 94321, 'VIN': "VIN2398", 'Status': "Active", 'Action': "NUL" },
-#                 { 'Name': 'Asad', 'Phone': "111-111-1111", 'Zip': 94321, 'VIN': "VIN2398", 'Status': "Active", 'Action': "NUL"},
-#                 { 'Name': 'Wasif', 'Phone': "111-111-1111", 'Zip': 94321, 'VIN': "VIN2398", 'Status': "Active", 'Action': "NUL" }
-#              ]
-
 customersData = [
       {"id": 1, "name": 'Azamat', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status":'Active', "action": ''},
       {"id": 2, "name": 'Kuttubek', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Inactive', "action": ''},
@@ -32,8 +24,7 @@ customersData = [
       {"id": 17, "name": 'Ethan', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Progress', "action": ''},
       {"id": 18, "name": 'Elebes', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Active', "action": ''},
       {"id": 19, "name": 'Ulan', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Inactive', "action": ''},
-      {"id": 20, "name": 'Ken', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Active', "action": ''},   
-      {"id": 21, "name": 'Ben', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Inactive', "action": ''}
+      {"id": 20, "name": 'Ken', "phone": '5718894220', "zip": '94330', "vin": '5346543654641', "status": 'Active', "action": ''}
 ]
 
 @app.route('/customers', methods=["GET"])

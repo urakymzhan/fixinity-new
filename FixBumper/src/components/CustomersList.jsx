@@ -38,19 +38,24 @@ class CustomersList extends Component {
     }
 
     render() {
-        const { match, location, history } = this.props;
+        const { match, location, history, updateVals } = this.props;
         let background =  location.state && location.state.background;
         // console.log("background from Customers", background);
         // console.log("location From CustomerList: " , location);
         // console.log(history);
 
         // for pagination
-        let { start, end } = this.props.data;
+        let { start, end, perPageValue } = this.props.data;
         let paginatedData = this.props.data.customers.slice(start-1, end);
-        // start = end;
-
-        console.log(paginatedData);
-
+        console.log("paginatedData outside ", paginatedData);
+        if (paginatedData.length == 0) {
+            paginatedData =  updateVals(this.props.data.customers);
+            // start = start - perPageValue
+            // end = end - perPageValue;
+            // paginatedData = this.props.data.customers.slice(start-1, end);
+            console.log("paginatedData inside ", paginatedData);
+        }
+       
         return (
             <div className="customers-page">
                 < Header />
@@ -76,11 +81,9 @@ class CustomersList extends Component {
                         {this.getHeader()}
                     </div>
                     {
-                        paginatedData.map((row, ind) => {
+                        paginatedData.map((row ) => {
                             // destruction
                             const { name, phone, zip, vin, status, action, id } = row;  
-                            // console.log("id on each pagination: ", id);
-
                             return ( 
                                 <div className="tbody" key={id}> 
                                     <div>{name}</div>
@@ -96,10 +99,10 @@ class CustomersList extends Component {
                                         />
                                     </div>
                                     <div id="action"> {action}
-                                    <Edit id={id}
+                                    <Edit 
+                                            id={id}
                                             background={background} 
                                             location={location} 
-                                            ind={ind}
                                             data={this.props.data}
                                             handleEditChange={this.props.handleEditChange} 
                                             editCustomer={this.props.editCustomer} />
@@ -172,7 +175,7 @@ function AddCustomerForm (props) {
 }
 
 function Edit(props) {
-    let { id, location, background, ind, handleEditChange, editCustomer, data } = props;
+    let { id, location, background, handleEditChange, editCustomer, data } = props;
     return (
         <span>      
             <Link
@@ -186,7 +189,7 @@ function Edit(props) {
             </Link>
             <Switch>
                 { 
-                    background && <Route path="/edit/:id" children={ < EditCustomerForm ind={ind} handleEditChange={handleEditChange} editCustomer={editCustomer} data={data}/> } /> 
+                    background && <Route path="/edit/:id" children={ < EditCustomerForm handleEditChange={handleEditChange} editCustomer={editCustomer} data={data}/> } /> 
                 }  
             </Switch>           
         </span>  
@@ -197,7 +200,15 @@ function EditCustomerForm (props) {
     let history = useHistory();
     const { id } = useParams();
     // console.log(id);
-    let { ind, handleEditChange, data, editCustomer } = props;
+    let { handleEditChange, data, editCustomer } = props;
+
+    var defaultVal  = {};
+    data.customers.map((customer) => {
+        if(customer.id == id) {
+            defaultVal = customer;
+        }
+    })
+    // console.log("defaultVal: ", defaultVal)
 
     let back = e => {
       e.stopPropagation();
@@ -215,19 +226,19 @@ function EditCustomerForm (props) {
                 </div>
                 <div>
                     {/*  TODO: figure out better way than id-1 */}
-                    <input type="input" placeholder="Name" name="name" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].name}/>
-                    <input type="input" placeholder="Status" name="status" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].status}/>
+                    <input type="input" placeholder="Name" name="name" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.name}/>
+                    <input type="input" placeholder="Status" name="status" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.status}/>
                 </div>
                 <div>
-                    <input type="input" placeholder="Email" name="email" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].email}/>
-                    <input type="input" placeholder="Vin" name="vin" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].vin}/>
+                    <input type="input" placeholder="Email" name="email" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.email}/>
+                    <input type="input" placeholder="Vin" name="vin" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.vin}/>
                 </div>
                 <div>
-                    <input type="input" placeholder="Phone" name="phone" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].phone}/>
-                    <input type="input" placeholder="Action" name="action" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].action} />
+                    <input type="input" placeholder="Phone" name="phone" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.phone}/>
+                    <input type="input" placeholder="Action" name="action" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.action} />
                 </div>
                 <div>
-                    <input type="input" placeholder="Zip Code" name="zip" onChange = {(e) => handleEditChange(e, id)} defaultValue={data.customers[id-1].zip}/>
+                    <input type="input" placeholder="Zip Code" name="zip" onChange = {(e) => handleEditChange(e, id)} defaultValue={defaultVal.zip}/>
                     <span id="checkbox"> slider-icon | Active Customer </span>
                 </div>
                 <div className="add-cancel-row">
